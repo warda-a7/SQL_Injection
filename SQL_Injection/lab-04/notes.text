@@ -1,0 +1,24 @@
+lab#4 - Finding Injection Union attack, Finding a column containing text
+
+
+OBJECTIVE: SQL injection in the product category filter
+
+USE: UNION attack
+
+METHODS:
+1-Determine the number of columns returned by the query.
+2-next step identify a colums thats compatible with string data
+
+GOAL: perfom SQL injection union attack that returns an additional row containing the value provided.
+to determine which columns are compatible with string data.
+
+
+soultion:
+1.the application has 3 coloumns. 'union select NULL,NULL,NULL--
+the string showmn in the website, no internal error occur. means the query match the number of columns.
+2. Col#2 has type string  stored in it.
+by testing the query
+'union select NULL,NULL,'a'-- >>show error because the string data its not in col#3
+'union select NULL,'a',NUL-- >> show the string in the website, no internal eroor, means the string dta a its in the second col.
+
+

